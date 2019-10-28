@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="jquery.min.js"></script>
+    <script>
+        $(function () {
+            $('#submit').click(function () {
+                var uname=$('#uname').val();
+                var pass=$('#pass').val();
+                if(uname==""||uname==null||pass==""||pass==null)
+                    alert("Please enter both the fields");
+                else
+                {
+                    $.get("getLogin.php",{'uname1':uname,'pass1':pass},function (data) {
+                        var res=JSON.parse(data);
+                        if(res!="")
+                        {
+                            alert("user "+res+ " is valid");
+                        }
+                        else
+                            alert("Login Unsuccessfull");
+                    })
+                }
+            })
+        })
+    </script>
+</head>
+<body style="padding-top: 4%">
+    <div class="container">
+    <div class="col-lg-4 col-lg-push-4">
+        <form action="" method="post">
+            <div class="panel panel-primary">
+                <div class="panel-heading text-center">
+                    <h1>Admin Login</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Username :</label>
+                        <input id="uname" type="text" class="form-control" name="uname">
+                    </div>
+                    <div class="form-group">
+                        <label>Password :</label>
+                        <input id="pass" type="text" class="form-control" name="pass">
+                    </div>
+                    <button name="submit" id="submit" type="button" class="btn btn-primary btn-block">LOGIN</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
